@@ -1,0 +1,1397 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Конструктор Сайтов</title>
+<style>
+:root{
+  --accent:#6366f1;
+  --accent-dark:#4f46e5;
+  --accent-soft:#eef2ff;
+  --bg:#f8fafc;
+  --bg-card:#ffffff;
+  --bg-soft:#f1f5f9;
+  --text:#1e293b;
+  --text-muted:#64748b;
+  --border:#e2e8f0;
+  --success:#10b981;
+  --danger:#ef4444;
+  --warning:#f59e0b;
+  --shadow:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);
+  --shadow-lg:0 10px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.05);
+  --radius:14px;
+  --radius-sm:8px;
+  --maxw:1200px;
+}
+[data-theme="dark"]{
+  --bg:#0f172a;
+  --bg-card:#1e293b;
+  --bg-soft:#334155;
+  --text:#f1f5f9;
+  --text-muted:#94a3b8;
+  --border:#334155;
+  --accent-soft:#312e81;
+  --shadow:0 1px 3px rgba(0,0,0,.4);
+  --shadow-lg:0 10px 25px -5px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,'Helvetica Neue',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;transition:background .25s,color .25s;font-size:15px}
+img{max-width:100%;display:block}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit;font-size:14px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.hidden{display:none!important}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;transition:all .15s;white-space:nowrap;border:1px solid transparent}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-dark)}
+.btn-ghost{background:var(--bg-soft);color:var(--text)}
+.btn-ghost:hover{background:var(--border)}
+.btn-outline{border-color:var(--border);color:var(--text);background:var(--bg-card)}
+.btn-outline:hover{border-color:var(--accent)}
+.btn-danger{background:var(--danger);color:#fff}
+.btn-danger:hover{opacity:.9}
+.btn-sm{padding:6px 12px;font-size:13px}
+.btn-icon{padding:8px;width:38px;height:38px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+
+/* ============ STOREFRONT ============ */
+.site-header{position:sticky;top:0;z-index:50;background:var(--bg-card);border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:16px}
+.logo-area{display:flex;align-items:center;gap:10px;cursor:pointer;flex-shrink:0}
+.logo-img{width:42px;height:42px;border-radius:10px;object-fit:cover;background:var(--bg-soft)}
+.logo-placeholder{width:42px;height:42px;border-radius:10px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex-shrink:0}
+.site-titles{display:flex;flex-direction:column;line-height:1.2}
+.site-title{font-weight:700;font-size:17px}
+.site-subtitle{font-size:12px;color:var(--text-muted)}
+.nav-categories{display:flex;gap:4px;flex:1;overflow-x:auto;scrollbar-width:none;padding:0 8px}
+.nav-categories::-webkit-scrollbar{display:none}
+.nav-cat{padding:8px 14px;border-radius:20px;font-size:14px;color:var(--text-muted);white-space:nowrap;transition:all .15s}
+.nav-cat:hover{background:var(--bg-soft);color:var(--text);text-decoration:none}
+.nav-cat.active{background:var(--accent);color:#fff}
+.header-actions{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.icon-btn{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--bg-soft);transition:all .15s;position:relative}
+.icon-btn:hover{background:var(--border)}
+.cart-badge{position:absolute;top:-4px;right:-4px;background:var(--danger);color:#fff;font-size:11px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+
+
+.hero{max-width:var(--maxw);margin:0 auto;padding:40px 20px;text-align:center}
+.hero h1{font-size:clamp(28px,5vw,46px);font-weight:800;margin-bottom:14px;letter-spacing:-.02em}
+.hero p{font-size:clamp(15px,2.5vw,19px);color:var(--text-muted);max-width:640px;margin:0 auto 24px}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero-img{width:100%;max-height:340px;object-fit:cover;border-radius:var(--radius);margin-top:28px}
+
+
+.search-bar{max-width:var(--maxw);margin:0 auto;padding:0 20px 20px}
+.search-wrap{position:relative;max-width:560px;margin:0 auto}
+.search-wrap svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--text-muted)}
+.search-input{width:100%;padding:13px 16px 13px 46px;border:1px solid var(--border);border-radius:24px;background:var(--bg-card);color:var(--text);font-size:15px;transition:all .15s}
+.search-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+
+
+.section{max-width:var(--maxw);margin:0 auto;padding:20px}
+.section-head{display:flex;align-items:center;justify-content:between;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.section-head h2{font-size:24px;font-weight:700}
+.filter-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.pill{padding:7px 16px;border-radius:20px;background:var(--bg-card);border:1px solid var(--border);font-size:13px;font-weight:500;color:var(--text-muted);transition:all .15s}
+.pill:hover{border-color:var(--accent)}
+.pill.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .2s;cursor:pointer;display:flex;flex-direction:column}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card-photo{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--bg-soft)}
+.card-photo-ph{width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,var(--bg-soft),var(--border));display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:40px}
+.card-body{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card-cat{font-size:11px;color:var(--accent);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.card-name{font-size:16px;font-weight:600;line-height:1.3}
+.card-desc{font-size:13px;color:var(--text-muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-price-row{display:flex;align-items:baseline;gap:8px;margin-top:auto;padding-top:8px}
+.card-price{font-size:19px;font-weight:700;color:var(--text)}
+.card-old-price{font-size:14px;color:var(--text-muted);text-decoration:line-through}
+.card-badge{position:absolute;background:var(--danger);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px}
+.card-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+.tag{font-size:10px;background:var(--accent-soft);color:var(--accent-dark);padding:2px 7px;border-radius:4px;font-weight:600}
+[data-theme="dark"] .tag{color:#a5b4fc}
+.card-actions{display:flex;gap:6px;padding:0 14px 14px}
+.card-actions .btn{flex:1}
+
+
+.empty-state{text-align:center;padding:60px 20px;color:var(--text-muted)}
+.empty-state .emoji{font-size:48px;margin-bottom:12px}
+
+
+.site-footer{background:var(--bg-card);border-top:1px solid var(--border);margin-top:40px;padding:36px 20px 24px}
+.footer-inner{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px}
+.footer-col h4{font-size:14px;font-weight:700;margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted)}
+.footer-col p,.footer-col a{font-size:14px;color:var(--text);display:block;margin-bottom:6px}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{max-width:var(--maxw);margin:24px auto 0;padding-top:18px;border-top:1px solid var(--border);text-align:center;font-size:13px;color:var(--text-muted)}
+
+
+/* ============ MODALS ============ */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:100;display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;backdrop-filter:blur(2px)}
+.modal{background:var(--bg-card);border-radius:var(--radius);width:100%;max-width:560px;margin:auto;box-shadow:var(--shadow-lg);animation:modalIn .2s ease}
+.modal.lg{max-width:760px}
+.modal.xl{max-width:920px}
+@keyframes modalIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--border)}
+.modal-head h3{font-size:18px;font-weight:700}
+.modal-body{padding:22px;max-height:70vh;overflow-y:auto}
+.modal-foot{padding:16px 22px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end}
+.close-btn{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--bg-soft);font-size:20px}
+.close-btn:hover{background:var(--border)}
+
+
+/* Product detail */
+.pd-grid{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:640px){.pd-grid{grid-template-columns:300px 1fr}}
+.pd-gallery{display:flex;flex-direction:column;gap:10px}
+.pd-main-img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--radius-sm);background:var(--bg-soft)}
+.pd-main-img-ph{width:100%;aspect-ratio:1;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--bg-soft),var(--border));display:flex;align-items:center;justify-content:center;font-size:60px;color:var(--text-muted)}
+.pd-thumbs{display:flex;gap:6px;flex-wrap:wrap}
+.pd-thumb{width:54px;height:54px;border-radius:6px;object-fit:cover;cursor:pointer;border:2px solid transparent}
+.pd-thumb.active{border-color:var(--accent)}
+.pd-info h2{font-size:24px;margin-bottom:6px}
+.pd-cat{color:var(--accent);font-weight:600;font-size:13px;text-transform:uppercase;margin-bottom:10px}
+.pd-price-row{display:flex;align-items:baseline;gap:10px;margin:14px 0}
+.pd-price{font-size:28px;font-weight:800}
+.pd-old-price{font-size:18px;color:var(--text-muted);text-decoration:line-through}
+.pd-desc{margin:16px 0;line-height:1.7;color:var(--text)}
+.pd-fields{background:var(--bg-soft);border-radius:var(--radius-sm);padding:14px;margin:14px 0}
+.pd-field{display:flex;justify-content:space-between;padding:5px 0;font-size:14px;border-bottom:1px solid var(--border)}
+.pd-field:last-child{border-bottom:none}
+.pd-field .k{color:var(--text-muted)}
+.pd-field .v{font-weight:600;text-align:right}
+.pd-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+
+
+/* Cart */
+.cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.cart-item:last-child{border-bottom:none}
+.cart-item img{width:64px;height:64px;border-radius:8px;object-fit:cover;background:var(--bg-soft)}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-name{font-weight:600;font-size:14px}
+.cart-item-price{color:var(--accent);font-weight:700;font-size:14px;margin-top:2px}
+.qty-control{display:flex;align-items:center;gap:8px;margin-top:6px}
+.qty-btn{width:28px;height:28px;border-radius:6px;background:var(--bg-soft);display:flex;align-items:center;justify-content:center;font-weight:700}
+.qty-btn:hover{background:var(--border)}
+.cart-total{display:flex;justify-content:space-between;align-items:center;font-size:18px;font-weight:700;padding:14px 0;border-top:2px solid var(--border);margin-top:8px}
+
+
+/* Forms */
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:5px;color:var(--text)}
+.form-control{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-card);color:var(--text);font-size:14px;transition:all .15s}
+.form-control:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+textarea.form-control{min-height:80px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:540px){.form-row{grid-template-columns:1fr}}
+.form-hint{font-size:12px;color:var(--text-muted);margin-top:4px}
+
+
+/* Photo upload */
+.photo-upload{border:2px dashed var(--border);border-radius:var(--radius-sm);padding:20px;text-align:center;cursor:pointer;transition:all .15s}
+.photo-upload:hover{border-color:var(--accent);background:var(--accent-soft)}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;margin-top:10px}
+.photo-item{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;background:var(--bg-soft)}
+.photo-item img{width:100%;height:100%;object-fit:cover}
+.photo-item .remove{position:absolute;top:4px;right:4px;background:rgba(0,0,0,.6);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px}
+.photo-item .star{position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.6);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px}
+.photo-item.main img{outline:3px solid var(--accent);outline-offset:-3px}
+
+
+/* ============ ADMIN ============ */
+.admin-bar{background:var(--accent-dark);color:#fff;padding:8px 20px;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600}
+.admin-bar .btn{background:rgba(255,255,255,.15);color:#fff;padding:5px 12px;font-size:12px}
+.admin-bar .btn:hover{background:rgba(255,255,255,.25)}
+
+
+.admin-layout{max-width:var(--maxw);margin:0 auto;padding:20px;display:grid;grid-template-columns:220px 1fr;gap:20px;min-height:calc(100vh - 100px)}
+@media(max-width:768px){.admin-layout{grid-template-columns:1fr}}
+.admin-nav{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:10px;height:fit-content;position:sticky;top:80px}
+@media(max-width:768px){.admin-nav{position:static;display:flex;overflow-x:auto;gap:4px}}
+.admin-nav-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:var(--radius-sm);font-size:14px;font-weight:500;color:var(--text-muted);transition:all .15s;width:100%;text-align:left}
+@media(max-width:768px){.admin-nav-item{white-space:nowrap}}
+.admin-nav-item:hover{background:var(--bg-soft);color:var(--text)}
+.admin-nav-item.active{background:var(--accent);color:#fff}
+.admin-content{min-width:0}
+.admin-panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px}
+.admin-panel-head h2{font-size:22px;font-weight:700}
+
+
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:24px}
+.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
+.stat-card .label{font-size:13px;color:var(--text-muted);margin-bottom:6px}
+.stat-card .value{font-size:28px;font-weight:800}
+.stat-card .emoji{font-size:22px;float:right}
+
+
+.data-table{width:100%;border-collapse:collapse;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.data-table th,.data-table td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
+.data-table th{background:var(--bg-soft);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted)}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover{background:var(--bg-soft)}
+.td-thumb{width:48px;height:48px;border-radius:6px;object-fit:cover;background:var(--bg-soft)}
+.td-actions{display:flex;gap:4px;justify-content:flex-end}
+.td-actions button{width:32px;height:32px;border-radius:6px;background:var(--bg-soft);display:flex;align-items:center;justify-content:center}
+.td-actions button:hover{background:var(--border)}
+.td-actions .del:hover{background:var(--danger);color:#fff}
+
+
+.color-input{width:44px;height:38px;padding:2px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-card);cursor:pointer}
+
+
+.toggle{position:relative;display:inline-block;width:44px;height:24px}
+.toggle input{opacity:0;width:0;height:0}
+.toggle .slider{position:absolute;cursor:pointer;inset:0;background:var(--border);border-radius:24px;transition:.2s}
+.toggle .slider:before{content:"";position:absolute;height:18px;width:18px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.2s}
+.toggle input:checked+.slider{background:var(--accent)}
+.toggle input:checked+.slider:before{transform:translateX(20px)}
+
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--text);color:var(--bg);padding:12px 22px;border-radius:24px;font-size:14px;font-weight:600;z-index:200;box-shadow:var(--shadow-lg);animation:toastIn .25s}
+.toast.error{background:var(--danger);color:#fff}
+.toast.success{background:var(--success);color:#fff}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+
+
+.login-screen{max-width:380px;margin:60px auto;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow-lg)}
+.login-screen h2{text-align:center;margin-bottom:6px}
+.login-screen p{text-align:center;color:var(--text-muted);font-size:13px;margin-bottom:22px}
+.login-screen .logo-placeholder{margin:0 auto 16px;width:56px;height:56px;font-size:24px}
+
+
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin-bottom:18px;overflow-x:auto}
+.tab{padding:10px 16px;font-size:14px;font-weight:600;color:var(--text-muted);border-bottom:2px solid transparent;white-space:nowrap}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+
+.note{background:var(--accent-soft);border-left:3px solid var(--accent);padding:12px 16px;border-radius:var(--radius-sm);font-size:13px;margin-bottom:16px}
+[data-theme="dark"] .note{background:var(--accent-soft);color:#cbd5e1}
+.note.warn{background:#fef3c7;border-left-color:var(--warning)}
+[data-theme="dark"] .note.warn{background:#422006;color:#fde68a}
+
+
+.order-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px}
+.order-card .oh{display:flex;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.order-card .oh strong{font-size:15px}
+.order-status{font-size:11px;padding:3px 10px;border-radius:12px;font-weight:700}
+.order-status.new{background:#fef3c7;color:#92400e}
+.order-status.done{background:#d1fae5;color:#065f46}
+.order-items{font-size:13px;color:var(--text-muted);margin:8px 0}
+.order-meta{font-size:13px;color:var(--text-muted);display:flex;gap:14px;flex-wrap:wrap;margin-top:6px}
+
+
+.mobile-menu-btn{display:none}
+@media(max-width:768px){
+  .mobile-menu-btn{display:flex}
+  .nav-categories{display:none}
+  .nav-categories.open{display:flex;position:absolute;top:100%;left:0;right:0;background:var(--bg-card);border-bottom:1px solid var(--border);padding:8px;flex-direction:column;z-index:40}
+  .nav-cat{padding:12px 16px}
+  .site-subtitle{display:none}
+}
+</style>
+</head>
+<body>
+
+
+<!-- ============ STOREFRONT ============ -->
+<div id="storefront">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-area" onclick="goHome()">
+        <div id="logoSlot"></div>
+        <div class="site-titles">
+          <span class="site-title" id="hdrTitle">Мой сайт</span>
+          <span class="site-subtitle" id="hdrSubtitle"></span>
+        </div>
+      </div>
+      <nav class="nav-categories" id="navCategories"></nav>
+      <div class="header-actions">
+        <button class="icon-btn mobile-menu-btn" onclick="toggleMobileMenu()" title="Меню">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <button class="icon-btn" onclick="toggleTheme()" title="Тема" id="themeBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.2" y1="4.2" x2="5.6" y2="5.6"/><line x1="18.4" y1="18.4" x2="19.8" y2="19.8"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.2" y1="19.8" x2="5.6" y2="18.4"/><line x1="18.4" y1="5.6" x2="19.8" y2="4.2"/></svg>
+        </button>
+        <button class="icon-btn" onclick="openCart()" title="Корзина">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+          <span class="cart-badge hidden" id="cartBadge">0</span>
+        </button>
+        <button class="icon-btn" onclick="openAdmin()" title="Админка" style="background:var(--accent);color:#fff">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <section class="hero" id="heroSection">
+    <h1 id="heroTitle">Добро пожаловать</h1>
+    <p id="heroSubtitle">Здесь будет подзаголовок вашего сайта</p>
+    <div class="hero-actions">
+      <button class="btn btn-primary" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Смотреть каталог</button>
+      <button class="btn btn-outline" onclick="scrollToFooter()">Контакты</button>
+    </div>
+    <img id="heroImg" class="hero-img hidden" alt="">
+  </section>
+
+
+  <div class="search-bar">
+    <div class="search-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" class="search-input" id="searchInput" placeholder="Поиск по названию и описанию..." oninput="renderCards()">
+    </div>
+  </div>
+
+
+  <section class="section" id="catalog">
+    <div class="filter-pills" id="filterPills"></div>
+    <div class="cards-grid" id="cardsGrid"></div>
+    <div class="empty-state hidden" id="emptyState">
+      <div class="emoji">📭</div>
+      <h3>Ничего не найдено</h3>
+      <p>Попробуйте изменить поиск или фильтр</p>
+    </div>
+  </section>
+
+
+  <footer class="site-footer" id="siteFooter">
+    <div class="footer-inner" id="footerInner"></div>
+    <div class="footer-bottom" id="footerBottom"></div>
+  </footer>
+</div>
+
+
+<!-- ============ ADMIN ============ -->
+<div id="adminView" class="hidden">
+  <div class="admin-bar">
+    <span>⚙️ Режим администратора</span>
+    <div style="display:flex;gap:8px">
+      <button class="btn" onclick="goHome()">← На сайт</button>
+      <button class="btn" onclick="adminLogout()">Выйти</button>
+    </div>
+  </div>
+  <div class="admin-layout">
+    <nav class="admin-nav" id="adminNav"></nav>
+    <div class="admin-content" id="adminContent"></div>
+  </div>
+</div>
+
+
+<!-- Modal container -->
+<div id="modalRoot"></div>
+<div id="toastRoot"></div>
+
+
+<!-- ============ DATA & APP ============ -->
+<script id="app-data" type="application/json">
+{
+  "settings": {
+    "siteTitle": "Мой магазин",
+    "siteSubtitle": "Товары для дома и семьи",
+    "logo": "",
+    "accentColor": "#6366f1",
+    "accentDark": "#4f46e5",
+    "theme": "light",
+    "currency": "₽",
+    "heroTitle": "Добро пожаловать в наш магазин",
+    "heroSubtitle": "Качественные товары по честным ценам. Добавляйте свои карточки, меняйте цены и фото прямо сейчас.",
+    "heroImage": "",
+    "phone": "+7 999 123-45-67",
+    "email": "info@moy-magazin.ru",
+    "address": "г. Москва, ул. Примерная, д. 1",
+    "workingHours": "Пн–Пт 9:00–20:00, Сб 10:00–18:00",
+    "telegram": "",
+    "whatsapp": "",
+    "instagram": "",
+    "footerText": "© 2026 Мой магазин. Все права защищены.",
+    "adminPassword": "admin",
+    "enableCart": true,
+    "enableSearch": true,
+    "customFields": []
+  },
+  "categories": [
+    {"id": "c1", "name": "Электроника", "icon": "📱"},
+    {"id": "c2", "name": "Для дома", "icon": "🏠"},
+    {"id": "c3", "name": "Аксессуары", "icon": "👜"}
+  ],
+  "cards": [
+    {"id":"p1","categoryId":"c1","name":"Беспроводные наушники AirSound","price":4990,"oldPrice":6990,"description":"Качественный звук, активное шумоподавление, до 30 часов работы. Идеальны для музыки и звонков.","photos":[""],"tags":["Хит","Новинка"],"available":true,"order":1,"fields":{}},
+    {"id":"p2","categoryId":"c1","name":"Умные часы FitWatch Pro","price":8990,"oldPrice":0,"description":"Монитор пульса, кислорода в крови, сон и 50+ спортивных режимов. Водонепроницаемые.","photos":[""],"tags":["Новинка"],"available":true,"order":2,"fields":{}},
+    {"id":"p3","categoryId":"c2","name":"Аромадиффузор деревянный","price":2490,"oldPrice":3200,"description":"Ультразвуковой увлажнитель с подсветкой. Объём 300 мл, до 10 часов работы.","photos":[""],"tags":[],"available":true,"order":3,"fields":{}},
+    {"id":"p4","categoryId":"c2","name":"Плед флисовый 200×150","price":1490,"oldPrice":0,"description":"Мягкий и тёплый плед из микрофлиса. Подходит для машины и дома.","photos":[""],"tags":["Хит"],"available":true,"order":4,"fields":{}},
+    {"id":"p5","categoryId":"c3","name":"Кожаный кошелёк Minimal","price":1990,"oldPrice":2500,"description":"Компактный кошелёк из натуральной кожи. 6 карточных отделений, защита RFID.","photos":[""],"tags":[],"available":true,"order":5,"fields":{}},
+    {"id":"p6","categoryId":"c3","name":"Солнцезащитные очки Polar","price":1290,"oldPrice":0,"description":"Поляризованные линзы, UV400. Лёгкая титановая оправа, чехол в комплекте.","photos":[""],"tags":["Новинка"],"available":true,"order":6,"fields":{}}
+  ],
+  "orders": []
+}
+</script>
+<script>
+/* ============================================================
+   КОНСТРУКТОР САЙТОВ — универсальный, автономный HTML
+   Данные хранятся в localStorage. Кнопка "Опубликовать"
+   генерирует готовый HTML-файл для заливки на хостинг.
+============================================================ */
+
+
+const LS_KEY = 'siteConstructorData_v1';
+const CART_KEY = 'siteConstructorCart_v1';
+const AUTH_KEY = 'siteConstructorAuth_v1';
+
+
+let DATA = null;
+let STATE = { activeCategory: 'all', adminTab: 'dashboard', isAdminAuthed: false, cart: [], pdPhotoIndex: 0, editingCardId: null, editingCategoryId: null };
+
+
+/* ---------- Load / Save ---------- */
+function getDefaultData(){
+  const raw = document.getElementById('app-data').textContent.trim();
+  try { return JSON.parse(raw); } catch(e){ return {settings:{},categories:[],cards:[],orders:[]}; }
+}
+function loadData(){
+  const saved = localStorage.getItem(LS_KEY);
+  if(saved){
+    try { DATA = JSON.parse(saved); } catch(e){ DATA = getDefaultData(); }
+  } else {
+    DATA = getDefaultData();
+  }
+  // ensure shape
+  DATA.settings = Object.assign(getDefaultData().settings, DATA.settings || {});
+  DATA.categories = DATA.categories || [];
+  DATA.cards = DATA.cards || [];
+  DATA.orders = DATA.orders || [];
+  DATA.settings.customFields = DATA.settings.customFields || [];
+}
+function saveData(){
+  localStorage.setItem(LS_KEY, JSON.stringify(DATA));
+}
+function loadCart(){
+  try { STATE.cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch(e){ STATE.cart = []; }
+}
+function saveCart(){
+  localStorage.setItem(CART_KEY, JSON.stringify(STATE.cart));
+  updateCartBadge();
+}
+
+
+/* ---------- Utils ---------- */
+function uid(){ return 'id' + Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function fmtPrice(p){ const n = Number(p)||0; return n.toLocaleString('ru-RU') + ' ' + (DATA.settings.currency||'₽'); }
+function toast(msg, type){
+  const root = document.getElementById('toastRoot');
+  const t = document.createElement('div');
+  t.className = 'toast ' + (type||'');
+  t.textContent = msg;
+  root.appendChild(t);
+  setTimeout(()=>{ t.style.opacity='0'; t.style.transition='opacity .25s'; setTimeout(()=>t.remove(),250); }, 2400);
+}
+function catName(id){ const c = DATA.categories.find(x=>x.id===id); return c ? c.name : 'Без категории'; }
+function catIcon(id){ const c = DATA.categories.find(x=>x.id===id); return c ? (c.icon||'📦') : '📦'; }
+
+
+/* ---------- Theme ---------- */
+function applyTheme(){
+  const t = DATA.settings.theme || 'light';
+  document.documentElement.setAttribute('data-theme', t);
+  document.documentElement.style.setProperty('--accent', DATA.settings.accentColor);
+  document.documentElement.style.setProperty('--accent-dark', DATA.settings.accentDark);
+  document.documentElement.style.setProperty('--accent-soft', hexToSoft(DATA.settings.accentColor, t==='dark'));
+}
+function toggleTheme(){
+  DATA.settings.theme = DATA.settings.theme === 'dark' ? 'light' : 'dark';
+  saveData(); applyTheme();
+}
+function hexToSoft(hex, dark){
+  try{
+    const h = hex.replace('#','');
+    const r=parseInt(h.substr(0,2),16), g=parseInt(h.substr(2,2),16), b=parseInt(h.substr(4,2),16);
+    if(dark) return `rgba({g},${b},0.18)`;
+    return `rgba({g},${b},0.10)`;
+  }catch(e){ return dark?'#312e81':'#eef2ff'; }
+}
+
+
+/* ============================================================
+   STOREFRONT RENDER
+============================================================ */
+function renderStorefront(){
+  applyTheme();
+  document.getElementById('hdrTitle').textContent = DATA.settings.siteTitle || 'Мой сайт';
+  document.getElementById('hdrSubtitle').textContent = DATA.settings.siteSubtitle || '';
+  // logo
+  const logoSlot = document.getElementById('logoSlot');
+  logoSlot.innerHTML = '';
+  if(DATA.settings.logo){
+    const img = document.createElement('img');
+    img.className='logo-img'; img.src=DATA.settings.logo; img.alt='logo';
+    logoSlot.appendChild(img);
+  } else {
+    const d = document.createElement('div');
+    d.className='logo-placeholder'; d.textContent=(DATA.settings.siteTitle||'М').charAt(0).toUpperCase();
+    logoSlot.appendChild(d);
+  }
+  // nav categories
+  const nav = document.getElementById('navCategories');
+  nav.innerHTML = `<a class="nav-cat ${STATE.activeCategory==='all'?'active':''}" onclick="setCategory('all')">Все товары</a>` +
+    DATA.categories.map(c=>`<a class="nav-cat {c.id}')">${esc(c.icon||'')} ${esc(c.name)}</a>`).join('');
+  // hero
+  document.getElementById('heroTitle').textContent = DATA.settings.heroTitle || '';
+  document.getElementById('heroSubtitle').textContent = DATA.settings.heroSubtitle || '';
+  const heroImg = document.getElementById('heroImg');
+  if(DATA.settings.heroImage){ heroImg.src=DATA.settings.heroImage; heroImg.classList.remove('hidden'); }
+  else { heroImg.classList.add('hidden'); }
+  // search visibility
+  document.querySelector('.search-bar').style.display = DATA.settings.enableSearch===false ? 'none' : '';
+  renderFilterPills();
+  renderCards();
+  renderFooter();
+  updateCartBadge();
+}
+
+
+function renderFilterPills(){
+  const pills = document.getElementById('filterPills');
+  pills.innerHTML = `<button class="pill ${STATE.activeCategory==='all'?'active':''}" onclick="setCategory('all')">Все</button>` +
+    DATA.categories.map(c=>`<button class="pill {c.id}')">${esc(c.icon||'')} ${esc(c.name)}</button>`).join('');
+}
+
+
+function setCategory(id){ STATE.activeCategory=id; renderStorefront(); document.getElementById('catalog').scrollIntoView({behavior:'smooth'}); }
+
+
+function renderCards(){
+  const q = (document.getElementById('searchInput').value||'').toLowerCase().trim();
+  let cards = DATA.cards.filter(c=>c.available!==false);
+  if(STATE.activeCategory!=='all') cards = cards.filter(c=>c.categoryId===STATE.activeCategory);
+  if(q) cards = cards.filter(c=> (c.name||'').toLowerCase().includes(q) || (c.description||'').toLowerCase().includes(q) || (c.tags||[]).some(t=>t.toLowerCase().includes(q)));
+  cards.sort((a,b)=>(a.order||0)-(b.order||0));
+  const grid = document.getElementById('cardsGrid');
+  const empty = document.getElementById('emptyState');
+  if(cards.length===0){ grid.innerHTML=''; empty.classList.remove('hidden'); return; }
+  empty.classList.add('hidden');
+  grid.innerHTML = cards.map(c=>{
+    const photo = c.photos && c.photos[0] ? c.photos[0] : '';
+    const photoHtml = photo ? `<img class="card-photo" src="{esc(c.name)}" loading="lazy">` : `<div class="card-photo-ph">${esc(catIcon(c.categoryId))}</div>`;
+    const oldPrice = c.oldPrice ? `<span class="card-old-price">${fmtPrice(c.oldPrice)}</span>` : '';
+    const tags = (c.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('');
+    const discount = (c.oldPrice && c.price < c.oldPrice) ? `<div class="card-badge" style="position:static;display:inline-block;margin-bottom:6px">-${Math.round((1-c.price/c.oldPrice)*100)}%</div>` : '';
+    return `<div class="card" onclick="openProduct('${c.id}')">
+      ${photoHtml}
+      <div class="card-body">
+        ${discount}
+        <span class="card-cat">${esc(catIcon(c.categoryId))} ${esc(catName(c.categoryId))}</span>
+        <div class="card-name">${esc(c.name)}</div>
+        <div class="card-desc">${esc(c.description||'')}</div>
+        ${tags?`<div class="card-tags">${tags}</div>`:''}
+        <div class="card-price-row">
+          <span class="card-price">${fmtPrice(c.price)}</span>
+          ${oldPrice}
+        </div>
+      </div>
+      <div class="card-actions" onclick="event.stopPropagation()">
+        <button class="btn btn-primary btn-sm" onclick="addToCart('${c.id}')">В корзину</button>
+        <button class="btn btn-outline btn-sm" onclick="openProduct('${c.id}')">Подробнее</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+
+function renderFooter(){
+  const s = DATA.settings;
+  const col1 = `<div class="footer-col"><h4>{esc(s.siteSubtitle||'')}</p></div>`;
+  const col2 = `<div class="footer-col"><h4>Контакты</h4>
+    ${s.phone?`<p>📞 <a href="tel:${esc(s.phone)}">${esc(s.phone)}</a></p>`:''}
+    ${s.email?`<p>✉️ <a href="mailto:${esc(s.email)}">${esc(s.email)}</a></p>`:''}
+    ${s.address?`<p>📍 ${esc(s.address)}</p>`:''}
+    ${s.workingHours?`<p>🕐 ${esc(s.workingHours)}</p>`:''}
+  </div>`;
+  let col3 = `<div class="footer-col"><h4>Категории</h4>`;
+  col3 += DATA.categories.map(c=>`<a onclick="setCategory('{esc(c.icon||'')} ${esc(c.name)}</a>`).join('') || '<p>Нет категорий</p>';
+  col3 += `</div>`;
+  let col4 = `<div class="footer-col"><h4>Мы в сети</h4>`;
+  if(s.telegram) col4 += `<a href="${esc(s.telegram)}" target="_blank">Telegram</a>`;
+  if(s.whatsapp) col4 += `<a href="${esc(s.whatsapp)}" target="_blank">WhatsApp</a>`;
+  if(s.instagram) col4 += `<a href="${esc(s.instagram)}" target="_blank">Instagram</a>`;
+  if(!s.telegram && !s.whatsapp && !s.instagram) col4 += `<p>Ссылки не добавлены</p>`;
+  col4 += `</div>`;
+  document.getElementById('footerInner').innerHTML = col1+col2+col3+col4;
+  document.getElementById('footerBottom').textContent = s.footerText || '';
+}
+
+
+function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); }
+function scrollToFooter(){ document.getElementById('siteFooter').scrollIntoView({behavior:'smooth'}); }
+function goHome(){
+  document.getElementById('adminView').classList.add('hidden');
+  document.getElementById('storefront').classList.remove('hidden');
+  renderStorefront();
+  scrollToTop();
+}
+function toggleMobileMenu(){ document.getElementById('navCategories').classList.toggle('open'); }
+
+
+/* ============================================================
+   PRODUCT MODAL
+============================================================ */
+function openProduct(id){
+  const c = DATA.cards.find(x=>x.id===id);
+  if(!c) return;
+  STATE.pdPhotoIndex = 0;
+  const photos = (c.photos||[]).filter(p=>p);
+  const mainPhoto = photos.length ? `<img class="pd-main-img" id="pdMainImg" src="{esc(catIcon(c.categoryId))}</div>`;
+  const thumbs = photos.length>1 ? `<div class="pd-thumbs">${photos.map((p,i)=>`<img class="pd-thumb {esc(p)}" onclick="setPdPhoto({i}">`).join('')}</div>` : '';
+  const oldPrice = c.oldPrice ? `<span class="pd-old-price">${fmtPrice(c.oldPrice)}</span>` : '';
+  const tags = (c.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('');
+  let fieldsHtml = '';
+  (DATA.settings.customFields||[]).forEach(f=>{
+    const v = c.fields && c.fields[f.id];
+    if(v!==undefined && v!=='') fieldsHtml += `<div class="pd-field"><span class="k">{esc(v)}</span></div>`;
+  });
+  const fieldsBlock = fieldsHtml ? `<div class="pd-fields">${fieldsHtml}</div>` : '';
+  const cartBtn = DATA.settings.enableCart===false ? '' : `<button class="btn btn-primary" onclick="addToCart('${c.id}');closeModal()">В корзину — ${fmtPrice(c.price)}</button>`;
+  showModal(`
+    <div class="modal lg">
+      <div class="modal-head"><h3>${esc(c.name)}</h3><button class="close-btn" onclick="closeModal()">×</button></div>
+      <div class="modal-body">
+        <div class="pd-grid">
+          <div class="pd-gallery">{thumbs}</div>
+          <div class="pd-info">
+            <div class="pd-cat">${esc(catIcon(c.categoryId))} ${esc(catName(c.categoryId))}</div>
+            <h2>${esc(c.name)}</h2>
+            <div class="pd-price-row"><span class="pd-price">{oldPrice}</div>
+            ${c.description?`<div class="pd-desc">${esc(c.description).replace(/\n/g,'<br>')}</div>`:''}
+            ${fieldsBlock}
+            ${tags?`<div class="pd-tags">${tags}</div>`:''}
+            <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+              ${cartBtn}
+              <button class="btn btn-outline" onclick="closeModal()">Закрыть</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `);
+}
+function setPdPhoto(i){
+  const photos = currentProductPhotos();
+  if(!photos[i]) return;
+  document.getElementById('pdMainImg').src = photos[i];
+  document.querySelectorAll('.pd-thumb').forEach(t=>t.classList.toggle('active', +t.dataset.i===i));
+  STATE.pdPhotoIndex = i;
+}
+function currentProductPhotos(){ return []; }
+
+
+/* ============================================================
+   CART
+============================================================ */
+function addToCart(id){
+  if(DATA.settings.enableCart===false){ openProduct(id); return; }
+  const c = DATA.cards.find(x=>x.id===id);
+  if(!c) return;
+  const ex = STATE.cart.find(x=>x.id===id);
+  if(ex) ex.qty++; else STATE.cart.push({id, qty:1});
+  saveCart();
+  toast('Добавлено в корзину', 'success');
+}
+function removeFromCart(id){ STATE.cart = STATE.cart.filter(x=>x.id!==id); saveCart(); openCart(); }
+function changeQty(id, d){
+  const it = STATE.cart.find(x=>x.id===id); if(!it) return;
+  it.qty += d; if(it.qty<=0) STATE.cart = STATE.cart.filter(x=>x.id!==id);
+  saveCart(); openCart();
+}
+function cartTotal(){ return STATE.cart.reduce((s,it)=>{ const c=DATA.cards.find(x=>x.id===it.id); return s + (c?c.price*it.qty:0); },0); }
+function updateCartBadge(){
+  const n = STATE.cart.reduce((s,it)=>s+it.qty,0);
+  const b = document.getElementById('cartBadge');
+  if(n>0){ b.textContent=n; b.classList.remove('hidden'); } else b.classList.add('hidden');
+}
+function openCart(){
+  if(DATA.settings.enableCart===false){ toast('Корзина отключена'); return; }
+  if(STATE.cart.length===0){
+    showModal(`<div class="modal"><div class="modal-head"><h3>Корзина</h3><button class="close-btn" onclick="closeModal()">×</button></div>
+      <div class="modal-body"><div class="empty-state"><div class="emoji">🛒</div><h3>Корзина пуста</h3><p>Добавьте товары из каталога</p></div></div></div>`);
+    return;
+  }
+  const items = STATE.cart.map(it=>{
+    const c = DATA.cards.find(x=>x.id===it.id); if(!c) return '';
+    const photo = c.photos&&c.photos[0]?`<img src="{esc(catIcon(c.categoryId))}</div>`;
+    return `<div class="cart-item">
+      ${photo}
+      <div class="cart-item-info">
+        <div class="cart-item-name">${esc(c.name)}</div>
+        <div class="cart-item-price">${fmtPrice(c.price)}</div>
+        <div class="qty-control">
+          <button class="qty-btn" onclick="changeQty('${c.id}',-1)">−</button>
+          <span>${it.qty}</span>
+          <button class="qty-btn" onclick="changeQty('${c.id}',1)">+</button>
+          <button class="btn btn-ghost btn-sm" style="margin-left:auto" onclick="removeFromCart('${c.id}')">Удалить</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  showModal(`
+    <div class="modal">
+      <div class="modal-head"><h3>Корзина</h3><button class="close-btn" onclick="closeModal()">×</button></div>
+      <div class="modal-body">
+        ${items}
+        <div class="cart-total"><span>Итого:</span><span>${fmtPrice(cartTotal())}</span></div>
+        <form id="orderForm" onsubmit="submitOrder(event)" style="margin-top:18px">
+          <h4 style="margin-bottom:12px">Оформление заказа</h4>
+          <div class="form-row">
+            <div class="form-group"><label>Имя *</label><input class="form-control" name="name" required></div>
+            <div class="form-group"><label>Телефон *</label><input class="form-control" name="phone" required></div>
+          </div>
+          <div class="form-group"><label>Email</label><input class="form-control" name="email" type="email"></div>
+          <div class="form-group"><label>Адрес доставки</label><textarea class="form-control" name="address" rows="2"></textarea></div>
+          <div class="form-group"><label>Комментарий</label><textarea class="form-control" name="comment" rows="2"></textarea></div>
+          <button class="btn btn-primary" type="submit" style="width:100%">Оформить заказ</button>
+        </form>
+      </div>
+    </div>
+  `);
+}
+function submitOrder(e){
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const order = {
+    id: uid(),
+    date: new Date().toISOString(),
+    items: STATE.cart.map(it=>{ const c=DATA.cards.find(x=>x.id===it.id); return {id:it.id,name:c?c.name:'',price:c?c.price:0,qty:it.qty}; }),
+    total: cartTotal(),
+    customer: { name:f.get('name'), phone:f.get('phone'), email:f.get('email'), address:f.get('address'), comment:f.get('comment') },
+    status: 'new'
+  };
+  DATA.orders.unshift(order);
+  saveData();
+  STATE.cart = []; saveCart();
+  closeModal();
+  toast('Заказ оформлен! Мы свяжемся с вами.', 'success');
+}
+
+
+/* ============================================================
+   MODAL ENGINE
+============================================================ */
+function showModal(html){
+  const root = document.getElementById('modalRoot');
+  root.innerHTML = `<div class="overlay" onclick="if(event.target===this)closeModal()">${html}</div>`;
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('modalRoot').innerHTML='';
+  document.body.style.overflow='';
+}
+
+
+/* ============================================================
+   ADMIN
+============================================================ */
+function openAdmin(){
+  if(STATE.isAdminAuthed){
+    showAdmin();
+  } else {
+    document.getElementById('storefront').classList.add('hidden');
+    document.getElementById('adminView').classList.remove('hidden');
+    document.getElementById('adminContent').innerHTML = `
+      <div class="login-screen">
+        <div class="logo-placeholder">🔐</div>
+        <h2>Вход в админку</h2>
+        <p>Введите пароль для управления сайтом</p>
+        <form onsubmit="adminLogin(event)">
+          <div class="form-group">
+            <input class="form-control" type="password" name="pass" placeholder="Пароль" autofocus>
+          </div>
+          <button class="btn btn-primary" type="submit" style="width:100%">Войти</button>
+        </form>
+        <p style="margin-top:14px;font-size:12px;text-align:center">Пароль по умолчанию: <strong>admin</strong></p>
+        <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:8px" onclick="goHome()">← На сайт</button>
+      </div>`;
+    document.getElementById('adminNav').innerHTML='';
+  }
+}
+function adminLogin(e){
+  e.preventDefault();
+  const pass = new FormData(e.target).get('pass');
+  if(pass === (DATA.settings.adminPassword||'admin')){
+    STATE.isAdminAuthed = true;
+    sessionStorage.setItem(AUTH_KEY,'1');
+    showAdmin();
+  } else {
+    toast('Неверный пароль','error');
+  }
+}
+function adminLogout(){
+  STATE.isAdminAuthed=false;
+  sessionStorage.removeItem(AUTH_KEY);
+  goHome();
+}
+function showAdmin(){
+  document.getElementById('storefront').classList.add('hidden');
+  document.getElementById('adminView').classList.remove('hidden');
+  renderAdminNav();
+  renderAdminTab(STATE.adminTab);
+}
+function renderAdminNav(){
+  const items = [
+    ['dashboard','📊','Дашборд'],
+    ['cards','🏷️','Карточки'],
+    ['categories','📁','Категории'],
+    ['orders','📦','Заказы'],
+    ['settings','⚙️','Настройки'],
+    ['data','💾','Данные']
+  ];
+  document.getElementById('adminNav').innerHTML = items.map(([k,ic,label])=>
+    `<button class="admin-nav-item {k}')">${ic} ${label}</button>`).join('');
+}
+function renderAdminTab(tab){
+  STATE.adminTab = tab;
+  renderAdminNav();
+  const fn = {dashboard:adminDashboard, cards:adminCards, categories:adminCategories, orders:adminOrders, settings:adminSettings, data:adminData}[tab];
+  if(fn) fn();
+}
+
+
+function adminDashboard(){
+  const visibleCards = DATA.cards.filter(c=>c.available!==false).length;
+  const hiddenCards = DATA.cards.length - visibleCards;
+  const newOrders = DATA.orders.filter(o=>o.status==='new').length;
+  const totalOrders = DATA.orders.length;
+  const revenue = DATA.orders.filter(o=>o.status==='done').reduce((s,o)=>s+o.total,0);
+  document.getElementById('adminContent').innerHTML = `
+    <div class="admin-panel-head"><h2>Дашборд</h2><button class="btn btn-primary" onclick="openCardEditor()">+ Добавить карточку</button></div>
+    <div class="stat-grid">
+      <div class="stat-card"><span class="emoji">🏷️</span><div class="label">Всего карточек</div><div class="value">${DATA.cards.length}</div></div>
+      <div class="stat-card"><span class="emoji">👁️</span><div class="label">Видимых</div><div class="value">${visibleCards}</div></div>
+      <div class="stat-card"><span class="emoji">🚫</span><div class="label">Скрытых</div><div class="value">${hiddenCards}</div></div>
+      <div class="stat-card"><span class="emoji">📁</span><div class="label">Категорий</div><div class="value">${DATA.categories.length}</div></div>
+      <div class="stat-card"><span class="emoji">📦</span><div class="label">Заказов</div><div class="value">${totalOrders}</div></div>
+      <div class="stat-card"><span class="emoji">🆕</span><div class="label">Новых заказов</div><div class="value">${newOrders}</div></div>
+    </div>
+    <div class="note">Добро пожаловать в панель управления! Здесь вы можете добавлять и редактировать карточки, категории, смотреть заказы и менять любые настройки сайта. Все изменения сохраняются автоматически в этом браузере. Чтобы обновить сайт для посетителей — нажмите «Опубликовать сайт» во вкладке «Данные».</div>
+    <h3 style="margin:20px 0 10px">Быстрые действия</h3>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-outline" onclick="renderAdminTab('cards')">🏷️ К карточкам</button>
+      <button class="btn btn-outline" onclick="renderAdminTab('orders')">📦 К заказам</button>
+      <button class="btn btn-outline" onclick="renderAdminTab('settings')">⚙️ Настройки</button>
+      <button class="btn btn-outline" onclick="renderAdminTab('data')">💾 Опубликовать</button>
+    </div>`;
+}
+
+
+/* ---------- CARDS ---------- */
+function adminCards(){
+  const rows = [...DATA.cards].sort((a,b)=>(a.order||0)-(b.order||0)).map(c=>{
+    const photo = c.photos&&c.photos[0]?`<img class="td-thumb" src="{esc(catIcon(c.categoryId))}</div>`;
+    return `<tr>
+      <td>${photo}</td>
+      <td><strong>{esc(catName(c.categoryId))}</span></td>
+      <td>{c.oldPrice?`<br><span style="font-size:12px;color:var(--text-muted);text-decoration:line-through">${fmtPrice(c.oldPrice)}</span>`:''}</td>
+      <td><label class="toggle"><input type="checkbox" {c.id}',this.checked)"><span class="slider"></span></label></td>
+      <td><div class="td-actions">
+        <button onclick="moveCard('${c.id}',-1)" title="Вверх">↑</button>
+        <button onclick="moveCard('${c.id}',1)" title="Вниз">↓</button>
+        <button onclick="openCardEditor('${c.id}')" title="Редактировать">✏️</button>
+        <button class="del" onclick="deleteCard('${c.id}')" title="Удалить">🗑</button>
+      </div></td>
+    </tr>`;
+  }).join('') || `<tr><td colspan="5" style="text-align:center;padding:30px;color:var(--text-muted)">Карточек пока нет. Нажмите «Добавить»</td></tr>`;
+  document.getElementById('adminContent').innerHTML = `
+    <div class="admin-panel-head"><h2>Карточки товаров</h2><button class="btn btn-primary" onclick="openCardEditor()">+ Добавить карточку</button></div>
+    <div class="note">Совет: первая загруженная фотография становится главной. Перетаскивайте карточки стрелками ↑↓ для изменения порядка.</div>
+    <table class="data-table">
+      <thead><tr><th></th><th>Название</th><th>Цена</th><th>Видим</th><th>Действия</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+function toggleCardAvail(id, val){
+  const c = DATA.cards.find(x=>x.id===id); if(c){ c.available=val; saveData(); }
+}
+function moveCard(id, dir){
+  const sorted = [...DATA.cards].sort((a,b)=>(a.order||0)-(b.order||0));
+  const i = sorted.findIndex(c=>c.id===id); if(i<0) return;
+  const j = i+dir; if(j<0||j>=sorted.length) return;
+  const a = sorted[i], b = sorted[j];
+  const t = a.order||0; a.order = b.order||0; b.order = t;
+  saveData(); adminCards();
+}
+function deleteCard(id){
+  if(!confirm('Удалить карточку?')) return;
+  DATA.cards = DATA.cards.filter(c=>c.id!==id); saveData(); adminCards();
+  toast('Карточка удалена');
+}
+
+
+function openCardEditor(id){
+  const c = id ? DATA.cards.find(x=>x.id===id) : {id:'',categoryId:DATA.categories[0]?.id||'',name:'',price:0,oldPrice:0,description:'',photos:[],tags:[],available:true,order:DATA.cards.length,fields:{}};
+  if(!c.photos) c.photos=[];
+  STATE.editingCardId = id || null;
+  const catOpts = DATA.categories.map(cat=>`<option value="${cat.id}" {esc(cat.icon||'')} ${esc(cat.name)}</option>`).join('') || '<option value="">Создайте категорию сначала</option>';
+  const cf = DATA.settings.customFields||[];
+  const cfHtml = cf.length ? `<h4 style="margin:18px 0 8px">Доп. поля</h4>` + cf.map(f=>{
+    const v = c.fields && c.fields[f.id] || '';
+    return `<div class="form-group"><label>{f.id}" value="{f.type==='number'?'number':'text'}"></div>`;
+  }).join('') : '';
+  showModal(`
+    <div class="modal xl">
+      <div class="modal-head"><h3>${id?'Редактировать карточку':'Новая карточка'}</h3><button class="close-btn" onclick="closeModal()">×</button></div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group"><label>Название *</label><input class="form-control" id="cfName" value="${esc(c.name)}"></div>
+          <div class="form-group"><label>Категория</label><select class="form-control" id="cfCat">${catOpts}</select></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Цена *</label><input class="form-control" id="cfPrice" type="number" value="${c.price||0}"></div>
+          <div class="form-group"><label>Старая цена (для скидки)</label><input class="form-control" id="cfOldPrice" type="number" value="${c.oldPrice||0}"></div>
+        </div>
+        <div class="form-group"><label>Описание</label><textarea class="form-control" id="cfDesc" rows="3">${esc(c.description)}</textarea></div>
+        <div class="form-group">
+          <label>Фотографии</label>
+          <div class="photo-upload" onclick="document.getElementById('cfPhotoInput').click()">
+            <div style="font-size:24px">📷</div>
+            <div style="font-size:13px;margin-top:4px">Нажмите, чтобы загрузить (можно несколько)</div>
+          </div>
+          <input type="file" id="cfPhotoInput" accept="image/*" multiple style="display:none" onchange="handleCardPhotos(event)">
+          <div class="photo-grid" id="cfPhotoGrid"></div>
+          <div class="form-hint">Первая фотография — главная. Нажмите ⭐ чтобы сделать главной.</div>
+        </div>
+        <div class="form-group"><label>Теги (через запятую)</label><input class="form-control" id="cfTags" value="${esc((c.tags||[]).join(', '))}" placeholder="Хит, Новинка"></div>
+        ${cfHtml}
+        <div class="form-group"><label><input type="checkbox" id="cfAvail" ${c.available!==false?'checked':''}> Показывать на сайте</label></div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" onclick="closeModal()">Отмена</button>
+        <button class="btn btn-primary" onclick="saveCard()">Сохранить</button>
+      </div>
+    </div>
+  `);
+  STATE._editingPhotos = [...c.photos];
+  renderCardPhotoGrid();
+}
+function renderCardPhotoGrid(){
+  const grid = document.getElementById('cfPhotoGrid'); if(!grid) return;
+  grid.innerHTML = STATE._editingPhotos.map((p,i)=>`<div class="photo-item ${i===0?'main':''}">
+    <img src="${esc(p)}" alt="">
+    <button class="star" onclick="makeMainPhoto({i===0?'★':'☆'}</button>
+    <button class="remove" onclick="removePhoto(${i})">×</button>
+  </div>`).join('');
+}
+function makeMainPhoto(i){
+  if(i<=0) return;
+  const p = STATE._editingPhotos.splice(i,1)[0];
+  STATE._editingPhotos.unshift(p);
+  renderCardPhotoGrid();
+}
+function removePhoto(i){ STATE._editingPhotos.splice(i,1); renderCardPhotoGrid(); }
+function handleCardPhotos(e){
+  const files = Array.from(e.target.files||[]);
+  files.forEach(f=>{
+    const reader = new FileReader();
+    reader.onload = ev => { STATE._editingPhotos.push(ev.target.result); renderCardPhotoGrid(); };
+    reader.readAsDataURL(f);
+  });
+  e.target.value='';
+}
+function saveCard(){
+  const name = document.getElementById('cfName').value.trim();
+  if(!name){ toast('Введите название','error'); return; }
+  const obj = {
+    id: STATE.editingCardId || uid(),
+    categoryId: document.getElementById('cfCat').value,
+    name,
+    price: Number(document.getElementById('cfPrice').value)||0,
+    oldPrice: Number(document.getElementById('cfOldPrice').value)||0,
+    description: document.getElementById('cfDesc').value.trim(),
+    photos: STATE._editingPhotos || [],
+    tags: document.getElementById('cfTags').value.split(',').map(s=>s.trim()).filter(Boolean),
+    available: document.getElementById('cfAvail').checked,
+    order: STATE.editingCardId ? (DATA.cards.find(c=>c.id===STATE.editingCardId).order ?? DATA.cards.length) : DATA.cards.length,
+    fields: {}
+  };
+  document.querySelectorAll('[data-cf]').forEach(inp=>{ obj.fields[inp.dataset.cf] = inp.value; });
+  if(STATE.editingCardId){
+    const i = DATA.cards.findIndex(c=>c.id===STATE.editingCardId);
+    DATA.cards[i] = Object.assign(DATA.cards[i], obj);
+  } else {
+    DATA.cards.push(obj);
+  }
+  saveData();
+  closeModal();
+  adminCards();
+  toast('Карточка сохранена','success');
+}
+
+
+/* ---------- CATEGORIES ---------- */
+function adminCategories(){
+  const rows = DATA.categories.map(c=>{
+    const count = DATA.cards.filter(x=>x.categoryId===c.id).length;
+    return `<tr>
+      <td style="font-size:22px">${esc(c.icon||'')}</td>
+      <td><strong>${esc(c.name)}</strong></td>
+      <td>${count}</td>
+      <td><div class="td-actions">
+        <button onclick="openCatEditor('${c.id}')" title="Редактировать">✏️</button>
+        <button class="del" onclick="deleteCategory('${c.id}')" title="Удалить">🗑</button>
+      </div></td>
+    </tr>`;
+  }).join('') || `<tr><td colspan="4" style="text-align:center;padding:30px;color:var(--text-muted)">Категорий нет</td></tr>`;
+  document.getElementById('adminContent').innerHTML = `
+    <div class="admin-panel-head"><h2>Категории</h2><button class="btn btn-primary" onclick="openCatEditor()">+ Добавить категорию</button></div>
+    <table class="data-table">
+      <thead><tr><th>Иконка</th><th>Название</th><th>Карточек</th><th>Действия</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+function openCatEditor(id){
+  const c = id ? DATA.categories.find(x=>x.id===id) : {id:'',name:'',icon:'📦'};
+  STATE.editingCategoryId = id||null;
+  showModal(`
+    <div class="modal">
+      <div class="modal-head"><h3>${id?'Редактировать категорию':'Новая категория'}</h3><button class="close-btn" onclick="closeModal()">×</button></div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group"><label>Иконка (эмодзи)</label><input class="form-control" id="catIcon" value="${esc(c.icon||'📦')}" maxlength="4"></div>
+          <div class="form-group"><label>Название *</label><input class="form-control" id="catName" value="${esc(c.name)}"></div>
+        </div>
+        <div class="form-hint">Иконку можно скопировать с сайта emojipedia.org или вставить эмодзи с клавиатуры.</div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" onclick="closeModal()">Отмена</button>
+        <button class="btn btn-primary" onclick="saveCategory()">Сохранить</button>
+      </div>
+    </div>`);
+}
+function saveCategory(){
+  const name = document.getElementById('catName').value.trim();
+  if(!name){ toast('Введите название','error'); return; }
+  const icon = document.getElementById('catIcon').value.trim() || '📦';
+  if(STATE.editingCategoryId){
+    const c = DATA.categories.find(x=>x.id===STATE.editingCategoryId);
+    c.name=name; c.icon=icon;
+  } else {
+    DATA.categories.push({id:uid(),name,icon});
+  }
+  saveData(); closeModal(); adminCategories();
+  toast('Категория сохранена','success');
+}
+function deleteCategory(id){
+  const count = DATA.cards.filter(x=>x.categoryId===id).length;
+  if(count>0 && !confirm(`В категории ${count} карточек. Они станут «без категории». Удалить?`)) return;
+  if(count===0 && !confirm('Удалить категорию?')) return;
+  DATA.categories = DATA.categories.filter(c=>c.id!==id);
+  saveData(); adminCategories();
+  toast('Категория удалена');
+}
+
+
+/* ---------- ORDERS ---------- */
+function adminOrders(){
+  if(DATA.orders.length===0){
+    document.getElementById('adminContent').innerHTML = `
+      <div class="admin-panel-head"><h2>Заказы</h2></div>
+      <div class="empty-state"><div class="emoji">📦</div><h3>Заказов пока нет</h3><p>Когда посетители оформят заказ — он появится здесь</p></div>`;
+    return;
+  }
+  const list = DATA.orders.map(o=>{
+    const items = o.items.map(it=>`{it.qty} — ${fmtPrice(it.price*it.qty)}`).join('<br>');
+    const d = new Date(o.date);
+    return `<div class="order-card">
+      <div class="oh">
+        <strong>Заказ #${o.id.slice(-5).toUpperCase()}</strong>
+        <span class="order-status {o.status==='new'?'Новый':'Выполнен'}</span>
+      </div>
+      <div class="order-items">${items}</div>
+      <div style="font-weight:700;font-size:16px;margin:6px 0">Итого: ${fmtPrice(o.total)}</div>
+      <div class="order-meta">
+        <span>👤 ${esc(o.customer.name)}</span>
+        <span>📞 <a href="tel:{esc(o.customer.phone)}</a></span>
+        ${o.customer.email?`<span>✉️ ${esc(o.customer.email)}</span>`:''}
+        <span>🕐 ${d.toLocaleString('ru-RU')}</span>
+      </div>
+      ${o.customer.address?`<div style="font-size:13px;color:var(--text-muted);margin-top:4px">📍 ${esc(o.customer.address)}</div>`:''}
+      ${o.customer.comment?`<div style="font-size:13px;color:var(--text-muted);margin-top:4px">💬 ${esc(o.customer.comment)}</div>`:''}
+      <div style="display:flex;gap:8px;margin-top:12px">
+        ${o.status==='new'?`<button class="btn btn-primary btn-sm" onclick="markOrderDone('${o.id}')">✓ Выполнен</button>`:`<button class="btn btn-ghost btn-sm" onclick="markOrderNew('${o.id}')">↺ В новые</button>`}
+        <button class="btn btn-danger btn-sm" onclick="deleteOrder('${o.id}')">Удалить</button>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('adminContent').innerHTML = `
+    <div class="admin-panel-head"><h2>Заказы (${DATA.orders.length})</h2></div>
+    ${list}`;
+}
+function markOrderDone(id){ const o=DATA.orders.find(x=>x.id===id); if(o){o.status='done';saveData();adminOrders();} }
+function markOrderNew(id){ const o=DATA.orders.find(x=>x.id===id); if(o){o.status='new';saveData();adminOrders();} }
+function deleteOrder(id){ if(!confirm('Удалить заказ?')) return; DATA.orders=DATA.orders.filter(o=>o.id!==id); saveData(); adminOrders(); }
+
+
+/* ---------- SETTINGS ---------- */
+function adminSettings(){
+  const s = DATA.settings;
+  const cfHtml = (s.customFields||[]).map(f=>`<div class="form-row" style="align-items:flex-end">
+    <div class="form-group"><label>Название поля</label><input class="form-control" data-cf-name="{esc(f.name)}"></div>
+    <div class="form-group"><label>Тип</label><select class="form-control" data-cf-type="${f.id}"><option value="text" ${f.type==='text'?'selected':''}>Текст</option><option value="number" ${f.type==='number'?'selected':''}>Число</option></select></div>
+    <div class="form-group" style="flex:0"><button class="btn btn-danger btn-sm" onclick="deleteCustomField('${f.id}')" style="height:38px">🗑</button></div>
+  </div>`).join('');
+  document.getElementById('adminContent').innerHTML = `
+    <div class="admin-panel-head"><h2>Настройки сайта</h2><button class="btn btn-primary" onclick="saveSettings()">Сохранить</button></div>
+    <div class="tabs">
+      <button class="tab active" onclick="settingsTab(event,'basic')">Основное</button>
+      <button class="tab" onclick="settingsTab(event,'hero')">Герой</button>
+      <button class="tab" onclick="settingsTab(event,'contacts')">Контакты</button>
+      <button class="tab" onclick="settingsTab(event,'appearance')">Внешний вид</button>
+      <button class="tab" onclick="settingsTab(event,'fields')">Доп. поля</button>
+      <button class="tab" onclick="settingsTab(event,'security')">Безопасность</button>
+    </div>
+    <div id="setBasic" class="set-tab">
+      <div class="form-row">
+        <div class="form-group"><label>Название сайта *</label><input class="form-control" id="sTitle" value="${esc(s.siteTitle)}"></div>
+        <div class="form-group"><label>Подзаголовок</label><input class="form-control" id="sSubtitle" value="${esc(s.siteSubtitle)}"></div>
+      </div>
+      <div class="form-group"><label>Логотип</label>
+        <div class="photo-upload" onclick="document.getElementById('logoInput').click()">
+          <div style="font-size:20px">🖼️</div><div style="font-size:13px;margin-top:4px">${s.logo?'Заменить логотип':'Загрузить логотип'}</div>
+        </div>
+        <input type="file" id="logoInput" accept="image/*" style="display:none" onchange="handleLogo(event)">
+        ${s.logo?`<div style="margin-top:8px;display:flex;align-items:center;gap:10px"><img src="${esc(s.logo)}" style="width:50px;height:50px;border-radius:8px;object-fit:cover"><button class="btn btn-ghost btn-sm" onclick="removeLogo()">Удалить</button></div>`:''}
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Валюта</label><input class="form-control" id="sCurrency" value="${esc(s.currency)}" maxlength="5"></div>
+        <div class="form-group"><label>Текст в подвале</label><input class="form-control" id="sFooter" value="${esc(s.footerText)}"></div>
+      </div>
+      <div class="form-group">
+        <label><input type="checkbox" id="sEnableCart" ${s.enableCart!==false?'checked':''}> Включить корзину и заказы</label>
+      </div>
+      <div class="form-group">
+        <label><input type="checkbox" id="sEnableSearch" ${s.enableSearch!==false?'checked':''}> Включить поиск</label>
+      </div>
+    </div>
+
+
+    <div id="setHero" class="set-tab hidden">
+      <div class="form-group"><label>Заголовок на главной</label><input class="form-control" id="sHeroTitle" value="${esc(s.heroTitle)}"></div>
+      <div class="form-group"><label>Подзаголовок на главной</label><textarea class="form-control" id="sHeroSubtitle" rows="3">${esc(s.heroSubtitle)}</textarea></div>
+      <div class="form-group"><label>Фон героя (большое изображение)</label>
+        <div class="photo-upload" onclick="document.getElementById('heroInput').click()">
+          <div style="font-size:20px">🖼️</div><div style="font-size:13px;margin-top:4px">${s.heroImage?'Заменить':'Загрузить'}</div>
+        </div>
+        <input type="file" id="heroInput" accept="image/*" style="display:none" onchange="handleHero(event)">
+        ${s.heroImage?`<div style="margin-top:8px;display:flex;align-items:center;gap:10px"><img src="${esc(s.heroImage)}" style="width:80px;height:50px;border-radius:6px;object-fit:cover"><button class="btn btn-ghost btn-sm" onclick="removeHero()">Удалить</button></div>`:''}
+      </div>
+    </div>
+
+
+    <div id="setContacts" class="set-tab hidden">
+      <div class="form-row">
+        <div class="form-group"><label>Телефон</label><input class="form-control" id="sPhone" value="${esc(s.phone)}"></div>
+        <div class="form-group"><label>Email</label><input class="form-control" id="sEmail" value="${esc(s.email)}"></div>
+      </div>
+      <div class="form-group"><label>Адрес</label><input class="form-control" id="sAddress" value="${esc(s.address)}"></div>
+      <div class="form-group"><label>Часы работы</label><input class="form-control" id="sHours" value="${esc(s.workingHours)}"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Telegram (ссылка)</label><input class="form-control" id="sTelegram" value="${esc(s.telegram)}" placeholder="https://t.me/..."></div>
+        <div class="form-group"><label>WhatsApp (ссылка)</label><input class="form-control" id="sWhatsapp" value="${esc(s.whatsapp)}" placeholder="https://wa.me/..."></div>
+      </div>
+      <div class="form-group"><label>Instagram (ссылка)</label><input class="form-control" id="sInstagram" value="${esc(s.instagram)}"></div>
+    </div>
+
+
+    <div id="setAppearance" class="set-tab hidden">
+      <div class="form-row">
+        <div class="form-group"><label>Основной цвет</label><div style="display:flex;gap:8px;align-items:center"><input type="color" class="color-input" id="sAccent" value="{esc(s.accentColor)}" oninput="document.getElementById('sAccent').value=this.value"></div></div>
+        <div class="form-group"><label>Тёмный оттенок</label><div style="display:flex;gap:8px;align-items:center"><input type="color" class="color-input" id="sAccentDark" value="{esc(s.accentDark)}" oninput="document.getElementById('sAccentDark').value=this.value"></div></div>
+      </div>
+      <div class="form-group"><label>Тема по умолчанию</label><select class="form-control" id="sTheme"><option value="light" ${s.theme==='light'?'selected':''}>Светлая</option><option value="dark" ${s.theme==='dark'?'selected':''}>Тёмная</option></select></div>
+      <div class="note">Цвет применяется сразу после сохранения. Посетители смогут переключать тему кнопкой в шапке.</div>
+    </div>
+
+
+    <div id="setFields" class="set-tab hidden">
+      <div class="note">Дополнительные поля — это любые характеристики товара (размер, цвет, вес, материал и т.д.). Они появятся в редакторе карточки и на странице товара. Это делает конструктор универсальным для любой тематики.</div>
+      ${cfHtml}
+      <button class="btn btn-outline" onclick="addCustomField()" style="margin-top:10px">+ Добавить поле</button>
+    </div>
+
+
+    <div id="setSecurity" class="set-tab hidden">
+      <div class="note warn">Пароль хранится в файле сайта (не в безопасности как настоящий серверный). Меняйте его на свой. Это защита от случайных изменений, а не от злоумышленников.</div>
+      <div class="form-group"><label>Новый пароль админки</label><input class="form-control" id="sPass" type="text" value="${esc(s.adminPassword)}"></div>
+      <button class="btn btn-primary" onclick="saveSettings()">Сохранить пароль</button>
+    </div>
+
+
+    <div style="margin-top:24px"><button class="btn btn-primary" onclick="saveSettings()">💾 Сохранить все настройки</button></div>
+  `;
+}
+function settingsTab(e, tab){
+  document.querySelectorAll('.set-tab').forEach(t=>t.classList.add('hidden'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById('set'+tab.charAt(0).toUpperCase()+tab.slice(1)).classList.remove('hidden');
+}
+function shadeColor(hex, percent){
+  try{
+    const h=hex.replace('#',''); let r=parseInt(h.substr(0,2),16),g=parseInt(h.substr(2,2),16),b=parseInt(h.substr(4,2),16);
+    r=Math.max(0,Math.min(255,r+Math.round(r*percent/100)));
+    g=Math.max(0,Math.min(255,g+Math.round(g*percent/100)));
+    b=Math.max(0,Math.min(255,b+Math.round(b*percent/100)));
+    return '#'+[r,g,b].map(x=>x.toString(16).padStart(2,'0')).join('');
+  }catch(e){ return hex; }
+}
+function handleLogo(e){ const f=e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=ev=>{DATA.settings.logo=ev.target.result;saveData();adminSettings();}; r.readAsDataURL(f); }
+function removeLogo(){ DATA.settings.logo=''; saveData(); adminSettings(); }
+function handleHero(e){ const f=e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=ev=>{DATA.settings.heroImage=ev.target.result;saveData();adminSettings();}; r.readAsDataURL(f); }
+function removeHero(){ DATA.settings.heroImage=''; saveData(); adminSettings(); }
+function addCustomField(){ DATA.settings.customFields.push({id:uid(),name:'Новое поле',type:'text'}); saveData(); adminSettings(); }
+function deleteCustomField(id){ DATA.settings.customFields=DATA.settings.customFields.filter(f=>f.id!==id); saveData(); adminSettings(); }
+function saveSettings(){
+  const s = DATA.settings;
+  s.siteTitle=val('sTitle'); s.siteSubtitle=val('sSubtitle');
+  s.currency=val('sCurrency'); s.footerText=val('sFooter');
+  s.enableCart=document.getElementById('sEnableCart').checked;
+  s.enableSearch=document.getElementById('sEnableSearch').checked;
+  s.heroTitle=val('sHeroTitle'); s.heroSubtitle=val('sHeroSubtitle');
+  s.phone=val('sPhone'); s.email=val('sEmail'); s.address=val('sAddress'); s.workingHours=val('sHours');
+  s.telegram=val('sTelegram'); s.whatsapp=val('sWhatsapp'); s.instagram=val('sInstagram');
+  s.accentColor=document.getElementById('sAccent').value;
+  s.accentDark=document.getElementById('sAccentDark').value;
+  s.theme=val('sTheme');
+  if(val('sPass')) s.adminPassword=val('sPass');
+  // custom fields
+  document.querySelectorAll('[data-cf-name]').forEach(inp=>{ const f=DATA.settings.customFields.find(x=>x.id===inp.dataset.cfName); if(f) f.name=inp.value; });
+  document.querySelectorAll('[data-cf-type]').forEach(sel=>{ const f=DATA.settings.customFields.find(x=>x.id===sel.dataset.cfType); if(f) f.type=sel.value; });
+  saveData(); applyTheme(); adminSettings();
+  toast('Настройки сохранены','success');
+}
+function val(id){ const el=document.getElementById(id); return el?el.value:''; }
+
+
+/* ---------- DATA / PUBLISH ---------- */
+function adminData(){
+  document.getElementById('adminContent').innerHTML = `
+    <div class="admin-panel-head"><h2>Данные и публикация</h2></div>
+    <div class="note warn">Важно: данные хранятся в этом браузере (localStorage). Чтобы увидеть сайт на другом устройстве или обновить его для посетителей — используйте «Опубликовать сайт».</div>
+
+
+    <h3 style="margin:20px 0 10px">🚀 Опубликовать сайт</h3>
+    <p style="color:var(--text-muted);margin-bottom:14px;font-size:14px">Создаёт готовый HTML-файл со всеми вашими карточками, фото и настройками внутри. Загрузите этот файл на любой хостинг — и посетители увидят ваш сайт.</p>
+    <button class="btn btn-primary" onclick="publishSite()">📥 Опубликовать сайт (скачать HTML)</button>
+
+
+    <h3 style="margin:24px 0 10px">💾 Резервная копия</h3>
+    <p style="color:var(--text-muted);margin-bottom:14px;font-size:14px">Сохраните все данные в JSON-файл. Полезно для бэкапа или переноса между устройствами.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-outline" onclick="exportJson()">Экспорт в JSON</button>
+      <button class="btn btn-outline" onclick="document.getElementById('importJsonInput').click()">Импорт из JSON</button>
+      <input type="file" id="importJsonInput" accept=".json" style="display:none" onchange="importJson(event)">
+    </div>
+
+
+    <h3 style="margin:24px 0 10px">⚠️ Сброс</h3>
+    <p style="color:var(--text-muted);margin-bottom:14px;font-size:14px">Удалить все данные и вернуть демонстрационный контент.</p>
+    <button class="btn btn-danger" onclick="resetData()">Сбросить к демонстрационным данным</button>
+
+
+    <h3 style="margin:24px 0 10px">📋 Как пользоваться</h3>
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;font-size:14px;line-height:1.8">
+      <strong>1.</strong> Откройте этот файл в браузере на компьютере.<br>
+      <strong>2.</strong> Нажмите ⚙️ в шапке, введите пароль (по умолчанию <code>admin</code>).<br>
+      <strong>3.</strong> В «Настройках» поменяйте название, контакты, цвета. В «Категориях» — разделы. В «Карточках» — товары с фото и ценами.<br>
+      <strong>4.</strong> Нажмите «Опубликовать сайт» здесь — скачается готовый файл.<br>
+      <strong>5.</strong> Загрузите файл на хостинг (Netlify, Vercel, GitHub Pages, свой сервер) или просто отправьте кому угодно — откроется как готовый сайт.<br>
+      <strong>6.</strong> Чтобы что-то поменять — откройте файл, войдите в админку, измените, снова «Опубликовать» и перезалейте.<br>
+    </div>`;
+}
+
+
+function publishSite(){
+  // Clone current document, replace embedded data, clear dynamic containers
+  const clone = document.documentElement.cloneNode(true);
+  // Write current data into the app-data script
+  const dataScript = clone.querySelector('#app-data');
+  if(dataScript) dataScript.textContent = JSON.stringify(DATA, null, 2);
+  // Clear dynamic content so file stays clean
+  ['navCategories','cardsGrid','filterPills','footerInner','adminContent','adminNav','modalRoot','toastRoot'].forEach(id=>{
+    const el = clone.querySelector('#'+id); if(el) el.innerHTML='';
+  });
+  ['heroImg'].forEach(id=>{ const el=clone.querySelector('#'+id); if(el){ el.removeAttribute('src'); el.classList.add('hidden'); } });
+  // Reset storefront visible
+  const sf = clone.querySelector('#storefront'); if(sf) sf.classList.remove('hidden');
+  const av = clone.querySelector('#adminView'); if(av) av.classList.add('hidden');
+  // Build full HTML
+  const html = '<!DOCTYPE html>\n' + clone.outerHTML;
+  const blob = new Blob([html], {type:'text/html'});
+  const a = document.createElement('a');
+  const fname = (DATA.settings.siteTitle||'site').replace(/[^\w\u0400-\u04FFа-яА-Я-]+/g,'_').slice(0,30) || 'site';
+  a.href = URL.createObjectURL(blob);
+  a.download = fname + '.html';
+  document.body.appendChild(a); a.click(); a.remove();
+  toast('Сайт опубликован! Файл скачан.','success');
+}
+
+
+function exportJson(){
+  const blob = new Blob([JSON.stringify(DATA,null,2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'site-backup-' + new Date().toISOString().slice(0,10) + '.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  toast('Данные экспортированы','success');
+}
+function importJson(e){
+  const f = e.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = ev=>{
+    try{
+      const obj = JSON.parse(ev.target.result);
+      if(!obj.settings || !Array.isArray(obj.cards)) throw new Error('bad');
+      DATA = obj;
+      DATA.categories = DATA.categories||[]; DATA.orders = DATA.orders||[];
+      DATA.settings.customFields = DATA.settings.customFields||[];
+      saveData(); applyTheme(); adminData();
+      toast('Данные импортированы','success');
+    }catch(err){ toast('Ошибка: неверный файл','error'); }
+  };
+  r.readAsText(f);
+  e.target.value='';
+}
+function resetData(){
+  if(!confirm('Сбросить ВСЕ данные к демонстрационным? Это необратимо!')) return;
+  localStorage.removeItem(LS_KEY);
+  localStorage.removeItem(CART_KEY);
+  DATA = getDefaultData();
+  STATE.cart=[]; saveCart();
+  saveData(); applyTheme(); adminData();
+  toast('Данные сброшены','success');
+}
+
+
+/* ============================================================
+   INIT
+============================================================ */
+function init(){
+  loadData();
+  loadCart();
+  applyTheme();
+  // auto-login within session
+  if(sessionStorage.getItem(AUTH_KEY)==='1') STATE.isAdminAuthed=true;
+  // hash routing for #admin
+  if(location.hash==='#admin'){ openAdmin(); }
+  else { renderStorefront(); }
+  window.addEventListener('hashchange', ()=>{
+    if(location.hash==='#admin') openAdmin();
+  });
+}
+init();
+</script>
+</body>
+</html>
